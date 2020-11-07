@@ -64,6 +64,17 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+VCR.configure do |config|
+  config.cassette_library_dir = "#{::Rails.root}/spec/cassettes"
+  config.hook_into :webmock
+  config.ignore_localhost = true
+  config.configure_rspec_metadata!
+  config.filter_sensitive_data('<DONT_SHARE_MY_KEY>') {ENV['OW_API_KEY'] }
+  config.filter_sensitive_data('<DONT_SHARE_MY_KEY>') {ENV['MAPQUEST_API_KEY'] }
+  config.default_cassette_options = { re_record_interval: 1.hour }
+end
+
 Shoulda::Matchers.configure do |config|
     config.integrate do |with|
       with.test_framework :rspec
