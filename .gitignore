@@ -31,4 +31,4 @@
 
 /coverage
 
-/cassettes
+spec/cassettes
