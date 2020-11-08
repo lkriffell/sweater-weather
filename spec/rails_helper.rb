@@ -70,9 +70,9 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.ignore_localhost = true
   config.configure_rspec_metadata!
-  config.filter_sensitive_data('<NOT_YOUR_KEY>') {ENV['OW_API_KEY'] }
-  config.filter_sensitive_data('<DONT_SHARE_MY_KEY>') {ENV['MAPQUEST_API_KEY'] }
   config.default_cassette_options = { re_record_interval: 1.hour }
+  config.filter_sensitive_data('<NOT_YOUR_KEY>') {ENV['OW_API_KEY'] }
+  config.filter_sensitive_data('<THIS_IS_MINE>') {ENV['MAPQUEST_API_KEY'] }
 end
 
 Shoulda::Matchers.configure do |config|
