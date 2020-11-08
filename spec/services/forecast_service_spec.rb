@@ -24,8 +24,8 @@ RSpec.describe 'forecast facade' do
                                     icon: String
                                   }
 
-            expect(forecast.keys).to eq(response_keys.keys)
-            
+            expect(forecast.keys).to include(response_keys.keys)
+
           end
         end
       end
