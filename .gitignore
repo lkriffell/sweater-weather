@@ -30,5 +30,3 @@
 /config/application.yml
 
 /coverage
-
-spec/cassettes
