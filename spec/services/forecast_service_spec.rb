@@ -107,7 +107,7 @@ RSpec.describe 'forecast service' do
             end
           end
 
-          it 'hourly_weather' do
+          xit 'hourly_weather' do
             hourly = {
                     dt: Integer,
                     temp: Float,
