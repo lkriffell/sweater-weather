@@ -12,7 +12,7 @@ class Trail
     @difficulty = trail_params[:difficulty]
     @location = trail_params[:location]
     @forecast = forecast(trail_params)
-    @current_conditions = [@forecast.current_weather[:temp], @forecast.current_weather[:conditions]]
+    @current_conditions = ["#{@forecast.current_weather[:temp]} F", @forecast.current_weather[:conditions]]
     @distance_to_trail = distance(start_location)
   end
 
