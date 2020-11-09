@@ -19,20 +19,19 @@ RSpec.describe 'forecast service' do
 
           it 'current_weather' do
             current = {
-                       dt:Integer,
-                       sunrise:Integer,
-                       sunset:Integer,
-                       temp:Integer,
-                       feels_like:Float,
-                       pressure:Integer,
-                       humidity:Integer,
-                       dew_point:Float,
-                       uvi:Float,
-                       clouds:Integer,
-                       visibility:Integer,
-                       wind_speed:Float,
-                       wind_deg:Integer,
-                       wind_gust:Float,
+                       dt:[Integer, Float],
+                       sunrise:[Integer, Float],
+                       sunset:[Integer, Float],
+                       temp:[Integer, Float],
+                       feels_like:[Integer, Float],
+                       pressure:[Integer, Float],
+                       humidity:[Integer, Float],
+                       dew_point:[Integer, Float],
+                       uvi:[Integer, Float],
+                       clouds:[Integer, Float],
+                       visibility:[Integer, Float],
+                       wind_speed:[Integer, Float],
+                       wind_deg:[Integer, Float],
                        weather: Array,
                       }
              weather = {
@@ -47,10 +46,10 @@ RSpec.describe 'forecast service' do
              expect(forecast[:current][:weather][0].keys).to eq(weather.keys)
 
              forecast[:current].each do |key, value|
-               if key != :temp
-                 expect(value.class).to eq(current[key])
+               if value.class == Integer || value.class == Float
+                 expect(current[key]).to include(value.class)
                else
-                 expect(value.to_s.numeric?).to eq(true)
+                 expect(value.class).to eq(current[key])
                end
              end
              forecast[:current][:weather][0].each do |key, value|
@@ -60,23 +59,23 @@ RSpec.describe 'forecast service' do
 
           it 'daily_weather' do
             daily = {
-                      dt: Integer,
-                      sunrise: Integer,
-                      sunset: Integer,
+                      dt: [Integer, Float],
+                      sunrise: [Integer, Float],
+                      sunset: [Integer, Float],
                       temp: Hash,
                       feels_like: Hash,
-                      pressure: Integer,
-                      humidity: Integer,
-                      dew_point: Float,
-                      wind_speed: Float,
-                      wind_deg: Integer,
+                      pressure: [Integer, Float],
+                      humidity: [Integer, Float],
+                      dew_point: [Integer, Float],
+                      wind_speed: [Integer, Float],
+                      wind_deg: [Integer, Float],
                       weather: Array,
-                      clouds: Integer,
-                      pop: Float,
-                      uvi: Float
+                      clouds: [Integer, Float],
+                      pop: [Integer, Float],
+                      uvi: [Integer, Float]
                     }
-            temp = {day: Float, min: Float, max: Float, night: Float, eve: Float, morn: Float}
-            feels_like = {day: Float, night: Float, eve: Float, morn: Float}
+            temp = {day: [Integer, Float], min: [Integer, Float], max: [Integer, Float], night: [Integer, Float], eve: [Integer, Float], morn: [Integer, Float]}
+            feels_like = {day: [Integer, Float], night: [Integer, Float], eve: [Integer, Float], morn: [Integer, Float]}
             weather = {id: Integer, main: String, description: String, icon: String}
 
             expect(forecast[:daily][0].keys).to eq(daily.keys)
@@ -86,18 +85,18 @@ RSpec.describe 'forecast service' do
 
             forecast[:daily].each do |day|
               day.each do |key, value|
-                if daily[key] == Integer || daily[key] == Float
-                  expect(value.to_s.numeric?).to eq(true)
+                if value.class == Integer || value.class == Float
+                  expect(daily[key]).to include(value.class)
                 else
                   expect(value.class).to eq(daily[key])
                 end
 
                 day[:temp].each do |key, value|
-                  expect(value.to_s.numeric?).to eq(true)
+                  expect(temp[key]).to include(value.class)
                 end
 
                 day[:feels_like].each do |key, value|
-                  expect(value.to_s.numeric?).to eq(true)
+                  expect(feels_like[key]).to include(value.class)
                 end
 
                 day[:weather][0].each do |key, value|
@@ -109,18 +108,18 @@ RSpec.describe 'forecast service' do
 
           it 'hourly_weather' do
             hourly = {
-                    dt: Integer,
-                    temp: Float,
-                    feels_like: Float,
-                    pressure: Integer,
-                    humidity: Integer,
-                    dew_point: Float,
-                    clouds: Integer,
-                    visibility: Integer,
-                    wind_speed: Float,
-                    wind_deg: Integer,
+                    dt: [Integer, Float],
+                    temp: [Integer, Float],
+                    feels_like: [Integer, Float],
+                    pressure: [Integer, Float],
+                    humidity: [Integer, Float],
+                    dew_point: [Integer, Float],
+                    clouds: [Integer, Float],
+                    visibility: [Integer, Float],
+                    wind_speed: [Integer, Float],
+                    wind_deg: [Integer, Float],
                     weather: Array,
-                    pop: Integer
+                    pop: [Integer, Float]
                   }
             weather = {id: Integer, main: String, description: String, icon: String}
 
@@ -129,8 +128,8 @@ RSpec.describe 'forecast service' do
 
             forecast[:hourly].each do |hour|
               hour.each do |key, value|
-                if hourly[key] == Integer || hourly[key] == Float
-                  expect(value.to_s.numeric?).to eq(true)
+                if value.class == Integer || value.class == Float
+                  expect(hourly[key]).to include(value.class)
                 else
                   expect(value.class).to eq(hourly[key])
                 end
@@ -144,10 +143,5 @@ RSpec.describe 'forecast service' do
         end
       end
     end
-  end
-end
-class String
-  def numeric?
-      Float(self) != nil rescue false
   end
 end

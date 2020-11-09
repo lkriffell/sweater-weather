@@ -1,6 +1,7 @@
 class ImageService
   def self.image_details(params)
     if params['time'] && params['weather']
+      require "pry"; binding.pry
       conn.get("/search?client_id=#{ENV['IMAGE_API_KEY']}&query=#{params['location']}&query=#{params['time']}&query=#{params['weather']}")
     elsif params['time'] && !params['weather']
       conn.get("/search?client_id=#{ENV['IMAGE_API_KEY']}&query=#{params['location']}&query=#{params['time']}")
