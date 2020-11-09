@@ -73,6 +73,8 @@ VCR.configure do |config|
   config.default_cassette_options = { re_record_interval: 1.hour }
   config.filter_sensitive_data('<NOT_YOUR_KEY>') {ENV['OW_API_KEY'] }
   config.filter_sensitive_data('<THIS_IS_MINE>') {ENV['MAPQUEST_API_KEY'] }
+  config.filter_sensitive_data('<STOP_LOOKING_HERE>') {ENV['IMAGE_API_KEY'] }
+  config.filter_sensitive_data('<DONT_EVEN_THINK_ABOUT_IT>') {ENV['HIKING_API_KEY'] }
 end
 
 Shoulda::Matchers.configure do |config|
