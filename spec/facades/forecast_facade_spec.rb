@@ -36,7 +36,7 @@ RSpec.describe 'forecast facade' do
           end
         end
       end
-      it 'daily_weather' do
+      xit 'daily_weather' do
         VCR.use_cassette 'denver_co' do
           params = {location: 'denver,co'}
           location = MapFacade.location_details(params[:location])
