@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'users service' do
   it 'can create a user' do
+    User.delete_all
+    
     params = {
               email: 'email@email.com',
               password: 'password'
