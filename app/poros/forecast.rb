@@ -4,6 +4,7 @@ class Forecast
               :hourly_weather
 
   def initialize(forecast_params)
+    @id = nil
     @current_weather = current(forecast_params)
     @daily_weather = []
     daily(forecast_params)
@@ -17,7 +18,7 @@ class Forecast
 
 
   def determine_wind_direction(degrees)
-    if degrees >= 330 && degrees < 30
+    if degrees >= 330 || degrees < 30
       "N"
     elsif degrees >= 30 && degrees < 60
       "NE"
@@ -26,7 +27,7 @@ class Forecast
     elsif degrees >= 120 && degrees < 150
       "SE"
     elsif degrees >= 150 && degrees < 210
-      "W"
+      "S"
     elsif degrees >= 210 && degrees < 240
       "SW"
     elsif degrees >= 240 && degrees < 300
