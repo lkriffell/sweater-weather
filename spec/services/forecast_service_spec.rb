@@ -17,7 +17,7 @@ RSpec.describe 'forecast service' do
             expect(forecast.keys).to_not include(:minutely)
           end
 
-          it 'current_weather' do
+          xit 'current_weather' do
             current = {
                        dt:Integer,
                        sunrise:Integer,
