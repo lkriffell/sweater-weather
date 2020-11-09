@@ -1,7 +1,9 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'simplecov'
-SimpleCov.start
 require 'spec_helper'
+
+SimpleCov.start
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
@@ -76,9 +78,9 @@ VCR.configure do |config|
 end
 
 Shoulda::Matchers.configure do |config|
-    config.integrate do |with|
-      with.test_framework :rspec
+  config.integrate do |with|
+    with.test_framework :rspec
 
-      with.library :rails
-    end
+    with.library :rails
   end
+end
