@@ -131,7 +131,11 @@ RSpec.describe 'forecast service' do
                 if value.class == Integer || value.class == Float
                   expect(hourly[key]).to include(value.class)
                 else
-                  expect(value.class).to eq(hourly[key])
+                  if key == :rain
+                    expect(hour[:rain]).to be_a(Hash)
+                  else
+                    expect(value.class).to eq(hourly[key])
+                  end
                 end
 
                 hour[:weather][0].each do |key, value|
