@@ -1,7 +1,6 @@
 class ImageService
   def self.image_details(params)
     if params['time'] && params['weather']
-      require "pry"; binding.pry
       conn.get("/search?client_id=#{ENV['IMAGE_API_KEY']}&query=#{params['location']}&query=#{params['time']}&query=#{params['weather']}")
     elsif params['time'] && !params['weather']
       conn.get("/search?client_id=#{ENV['IMAGE_API_KEY']}&query=#{params['location']}&query=#{params['time']}")
@@ -14,9 +13,5 @@ class ImageService
 
   def self.conn
     Faraday.new("https://api.unsplash.com/photos")
-  end
-
-  def check_for_keyword
-    params['keyword']
   end
 end
