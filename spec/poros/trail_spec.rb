@@ -21,6 +21,8 @@ RSpec.describe 'trail poro spec' do
         expect(trail.difficulty.class).to eq(String)
         expect(trail.location.class).to eq(String)
         expect(trail.current_conditions.class).to eq(Array)
+        expect(trail.current_conditions.first.class).to eq(String)
+        expect(trail.current_conditions.last.class).to eq(String)
         expect(trail.distance_to_trail.class).to eq(Route)
       end
     end
