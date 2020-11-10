@@ -8,8 +8,8 @@ RSpec.describe 'location poro' do
 
       location = Location.new(location_details)
 
-      expect(location.lat).to be_a(Float)
-      expect(location.lon).to be_a(Float)
+      expect(location.lat).to eq(39.738453)
+      expect(location.lon).to eq(-104.984853)
     end
   end
 end
