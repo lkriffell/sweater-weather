@@ -126,6 +126,11 @@ RSpec.describe 'forecast service' do
                     weather: Array,
                     pop: [Integer, Float]
                   }
+            sometimes = {
+                          wind_gust: [Integer, Float],
+                          rain: Hash,
+                          snow: Hash
+                        }
             weather = {id: Integer, main: String, description: String, icon: String}
 
             expect(forecast[:hourly][0].keys).to eq(hourly.keys)
@@ -136,8 +141,8 @@ RSpec.describe 'forecast service' do
                 if value.class == Integer || value.class == Float
                   expect(hourly[key]).to include(value.class)
                 else
-                  if key == :rain
-                    expect(hour[:rain]).to be_a(Hash)
+                  if !sometimes[key].nil?
+                    expect(hour[key]).to be_a(Hash)
                   else
                     expect(value.class).to eq(hourly[key])
                   end
