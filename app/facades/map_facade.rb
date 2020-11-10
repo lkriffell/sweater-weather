@@ -13,7 +13,7 @@ class MapFacade
         forecast = ForecastFacade.forecast_details_50_hours(road_trip_params[:destination])
         create_road_trip(road_trip_params, route, forecast)
       else
-        return Error.new("Impossible Route!")
+        Error.new("Impossible Route!")
       end
     else
       Error.new("That key is not valid!")
