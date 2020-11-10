@@ -141,8 +141,8 @@ RSpec.describe 'forecast service' do
                 if value.class == Integer || value.class == Float
                   expect(hourly[key]).to include(value.class)
                 else
-                  if !sometimes[key].nil?
-                    expect(hour[key]).to be_a(Hash)
+                  if sometimes.keys.include?(key)
+                    expect(hour[key]).to be_a(sometimes[key])
                   else
                     expect(value.class).to eq(hourly[key])
                   end
