@@ -27,9 +27,11 @@ RSpec.describe 'users facade' do
         "password_confirmation": "word"
       }
 
-      user = UsersFacade.create_user(params)
+      error = UsersFacade.create_user(params)
 
-      expect(user.message).to eq('Passwords must match!')
+      expect(error.message).to eq('Passwords must match!')
+      expect(error.message).to be_a(String)
+      expect(error).to be_an(Error)
     end
     it 'returns an error if email already exists' do
       params = {
@@ -39,9 +41,11 @@ RSpec.describe 'users facade' do
       }
 
       user = UsersFacade.create_user(params)
-      user = UsersFacade.create_user(params)
+      error = UsersFacade.create_user(params)
 
-      expect(user.message).to eq('That email already exists!')
+      expect(error.message).to eq('That email already exists!')
+      expect(error.message).to be_a(String)
+      expect(error).to be_an(Error)
     end
   end
 
@@ -72,6 +76,8 @@ RSpec.describe 'users facade' do
       error = UsersFacade.check_credentials(params)
 
       expect(error.message).to eq('That email and password combination does not exist!')
+      expect(error.message).to be_a(String)
+      expect(error).to be_an(Error)
     end
     it 'returns an error if email doesnt exist' do
       params = {
@@ -81,6 +87,8 @@ RSpec.describe 'users facade' do
       error = UsersFacade.check_credentials(params)
 
       expect(error.message).to eq('That email and password combination does not exist!')
+      expect(error.message).to be_a(String)
+      expect(error).to be_an(Error)
     end
   end
 end
