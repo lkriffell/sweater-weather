@@ -3,13 +3,13 @@ class Forecast
               :daily_weather,
               :hourly_weather
 
-  def initialize(forecast_params)
+  def initialize(forecast_params, hours = 8)
     @id = nil
     @current_weather = current(forecast_params)
     @daily_weather = []
     daily(forecast_params)
     @hourly_weather = []
-    hourly(forecast_params)
+    hourly(forecast_params, hours)
   end
 
   def convert_date(date)
@@ -67,9 +67,10 @@ class Forecast
     end
   end
 
-  def hourly(forecast_params)
-    forecast_params[:hourly].take(8).each do |forecast|
+  def hourly(forecast_params, hours)
+    forecast_params[:hourly].take(hours).each do |forecast|
       hourly_hash = {
+        temperature: forecast[:temp],
         dt: convert_date(forecast[:dt]),
         wind_speed: forecast[:wind_speed],
         wind_direction: determine_wind_direction(forecast[:wind_deg]),
