@@ -8,9 +8,9 @@ RSpec.describe RoadTrip do
 
     it 'can exist' do
       VCR.use_cassette 'custom_hours_forecast', :record => :none do
-        forecast = ForecastFacade.forecast_details_50_hours("Pueblo,CO")
         road_trip_params = {:origin=>"Denver,CO", :destination=>"Pueblo,CO", :api_key=>"jgn983hy48thw9begh98h4539h4"}
         route = {route: {formattedTime: "01:43:57"}}
+        forecast = ForecastFacade.forecast_details_50_hours("Pueblo,CO")
 
         road_trip = RoadTrip.new(road_trip_params, route, forecast)
 

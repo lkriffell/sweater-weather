@@ -15,10 +15,12 @@ class RoadTrip
   end
 
   def rounded_travel_time
-    hours = @travel_time.to_time.hour
-    mins = @travel_time.to_time.min
+    time = @travel_time.split(':')
+    hours = time[0].to_i
+    mins = time[1].to_i
     if mins > 30
       hours += 1
     end
+    hours
   end
 end
