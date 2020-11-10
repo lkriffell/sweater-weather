@@ -13,20 +13,20 @@ RSpec.describe 'forecast poro' do
       expect(forecast.daily_weather).to be_a(Array)
       expect(forecast.hourly_weather).to be_a(Array)
 
-      hour_one = {:temperature=>"32.14 F", :dt=>'Tue, 10 Nov 2020'.to_date, :wind_speed=>"10.51 mph", :wind_direction=>"N", :conditions=>"overcast clouds", :icon=>"04n"}
+      hour_one = {:temperature=>"32.13 F", :dt=>'Tue, 10 Nov 2020'.to_date, :wind_speed=>"10.54 mph", :wind_direction=>"N", :conditions=>"overcast clouds", :icon=>"04n"}
       expect(forecast.hourly_weather.first).to eq(hour_one)
 
-      day_one = {:dt=>'Tue, 10 Nov 2020'.to_date, :sunrise=>'Mon, 09 Nov 2020'.to_date, :sunset=>'Tue, 10 Nov 2020'.to_date, :max_temp=>"35.26 F", :min_temp=>"32.14 F", :conditions=>"overcast clouds", :icon=>"04d"}
+      day_one = {:dt=>'Wed, 11 Nov 2020'.to_date, :sunrise=>'Tue, 10 Nov 2020'.to_date, :sunset=>'Wed, 11 Nov 2020'.to_date, :max_temp=>"32.99 F", :min_temp=>"29.25 F", :conditions=>"overcast clouds", :icon=>"04d"}
       expect(forecast.daily_weather.first).to eq(day_one)
 
       current = {:dt=>'Tue, 10 Nov 2020'.to_date,
-                 :sunrise=>'Mon, 09 Nov 2020'.to_date,
-                 :sunset=>'Tue, 10 Nov 2020'.to_date,
-                 :temp=>"32.14 F",
-                 :feels_like=>"22.41 F",
-                 :humidity=>93,
+                 :sunrise=>'Tue, 10 Nov 2020'.to_date,
+                 :sunset=>'Wed, 11 Nov 2020'.to_date,
+                 :temp=>"32.13 F",
+                 :feels_like=>"22.46 F",
+                 :humidity=>95,
                  :uvi=>0.12,
-                 :visibility=>10000,
+                 :visibility=>1639,
                  :conditions=>"overcast clouds",
                  :icon=>"04n"}
        expect(forecast.current_weather).to eq(current)
