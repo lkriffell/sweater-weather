@@ -12,8 +12,8 @@ RSpec.describe 'forecast facade' do
                                   dt: Date,
                                   sunrise: Date,
                                   sunset: Date,
-                                  temp: Integer,
-                                  feels_like: Float,
+                                  temp: String,
+                                  feels_like: String,
                                   humidity: Integer,
                                   uvi: Float,
                                   visibility: Integer,
@@ -24,14 +24,13 @@ RSpec.describe 'forecast facade' do
           expect(forecast.current_weather[:dt].class).to eq(current_forecast_keys[:dt])
           expect(forecast.current_weather[:sunrise].class).to eq(current_forecast_keys[:sunrise])
           expect(forecast.current_weather[:sunset].class).to eq(current_forecast_keys[:sunset])
-          expect([Integer, Float]).to include(forecast.current_weather[:temp].class)
-          expect([Integer, Float]).to include(forecast.current_weather[:feels_like].class)
+          expect(forecast.current_weather[:temp].class).to eq(current_forecast_keys[:temp])
+          expect(forecast.current_weather[:feels_like].class).to eq(current_forecast_keys[:feels_like])
+          expect(forecast.current_weather[:conditions].class).to eq(current_forecast_keys[:conditions])
+          expect(forecast.current_weather[:icon].class).to eq(current_forecast_keys[:icon])
           expect([Integer, Float]).to include(forecast.current_weather[:humidity].class)
           expect([Integer, Float]).to include(forecast.current_weather[:uvi].class)
           expect([Integer, Float]).to include(forecast.current_weather[:visibility].class)
-          expect([Integer, Float]).to include(forecast.current_weather[:temp].class)
-          expect(forecast.current_weather[:conditions].class).to eq(current_forecast_keys[:conditions])
-          expect(forecast.current_weather[:icon].class).to eq(current_forecast_keys[:icon])
         end
       end
       it 'daily_weather' do
@@ -42,8 +41,8 @@ RSpec.describe 'forecast facade' do
           daily_forecast_keys = {dt: Date,
                                   sunrise: Date,
                                   sunset: Date,
-                                  max_temp: [Integer, Float],
-                                  min_temp: [Integer, Float],
+                                  max_temp: String,
+                                  min_temp: String,
                                   conditions: String,
                                   icon: String
                                 }
@@ -52,8 +51,8 @@ RSpec.describe 'forecast facade' do
             expect(day[:dt].class).to eq(daily_forecast_keys[:dt])
             expect(day[:sunrise].class).to eq(daily_forecast_keys[:sunrise])
             expect(day[:sunset].class).to eq(daily_forecast_keys[:sunset])
-            expect([Integer, Float]).to include(day[:max_temp].class)
-            expect([Integer, Float]).to include(day[:min_temp].class)
+            expect(day[:max_temp].class).to eq(daily_forecast_keys[:max_temp])
+            expect(day[:min_temp].class).to eq(daily_forecast_keys[:min_temp])
             expect(day[:conditions].class).to eq(daily_forecast_keys[:conditions])
             expect(day[:icon].class).to eq(daily_forecast_keys[:icon])
           end
@@ -65,7 +64,7 @@ RSpec.describe 'forecast facade' do
           response_keys = {current: Hash, hourly: Array, daily: Array}
           forecast = ForecastFacade.forecast_details(params[:location])
           hourly_forecast_keys = {dt: Date,
-                                  wind_speed: Float,
+                                  wind_speed: String,
                                   wind_direction: String,
                                   conditions: String,
                                   icon: String

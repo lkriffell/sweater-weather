@@ -18,7 +18,7 @@ RSpec.describe RoadTrip do
         expect(road_trip.end_city).to eq("Pueblo,CO")
         expect(road_trip.start_city).to eq("Denver,CO")
         expect(road_trip.travel_time).to eq("01:43:57")
-        expect(road_trip.weather_at_eta[:temperature]).to eq(49.24)
+        expect(road_trip.weather_at_eta[:temperature]).to eq("50.9 F")
         expect(road_trip.weather_at_eta[:conditions]).to eq("clear sky")
       end
     end

@@ -31,7 +31,7 @@ RSpec.describe 'map facade' do
         expect(road_trip.start_city).to be_a(String)
         expect(road_trip.travel_time).to be_a(String)
         expect(road_trip.weather_at_eta).to be_a(Hash)
-        expect(road_trip.weather_at_eta[:temperature]).to be_a(Float)
+        expect(road_trip.weather_at_eta[:temperature]).to be_a(String)
         expect(road_trip.weather_at_eta[:conditions]).to be_a(String)
       end
     end
