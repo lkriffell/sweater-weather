@@ -4,7 +4,7 @@ RSpec.describe 'forecast facade' do
   describe 'forecast_details' do
     describe 'returns a forecast object for' do
       it 'current_weather' do
-        VCR.use_cassette 'denver_co_current_forecast' do
+        VCR.use_cassette 'denver_co_forecast_current' do
           params = {location: 'denver,co'}
           response_keys = {current: Hash, hourly: Array, daily: Array}
           forecast = ForecastFacade.forecast_details(params[:location])
