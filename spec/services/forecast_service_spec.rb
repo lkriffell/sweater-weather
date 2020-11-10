@@ -33,6 +33,9 @@ RSpec.describe 'forecast service' do
                        wind_speed:[Integer, Float],
                        wind_deg:[Integer, Float],
                        weather: Array,
+                       wind_gust: [Integer, Float],
+                       rain: Hash,
+                       snow: Hash
                       }
              weather = {
                         id:Integer,
@@ -41,7 +44,9 @@ RSpec.describe 'forecast service' do
                         icon:String
                        }
 
-             expect(forecast[:current].keys).to eq(current.keys)
+             forecast[:current].keys.each do |key, value|
+               expect(current.keys).to include(key)
+             end
              expect(forecast[:current][:weather][0].keys).to eq(weather.keys)
              expect(forecast[:current][:weather][0].keys).to eq(weather.keys)
 
