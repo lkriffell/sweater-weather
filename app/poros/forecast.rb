@@ -42,8 +42,8 @@ class Forecast
       dt: convert_date(forecast_params[:current][:dt]),
       sunrise: convert_date(forecast_params[:current][:sunrise]),
       sunset: convert_date(forecast_params[:current][:sunset]),
-      temp: forecast_params[:current][:temp],
-      feels_like: forecast_params[:current][:feels_like],
+      temp: "#{forecast_params[:current][:temp]} F",
+      feels_like: "#{forecast_params[:current][:feels_like]} F",
       humidity: forecast_params[:current][:humidity],
       uvi: forecast_params[:current][:uvi],
       visibility: forecast_params[:current][:visibility],
@@ -58,8 +58,8 @@ class Forecast
         dt: convert_date(forecast[:dt]),
         sunrise: convert_date(forecast[:sunrise]),
         sunset: convert_date(forecast[:sunset]),
-        max_temp: forecast[:temp][:max],
-        min_temp: forecast[:temp][:min],
+        max_temp: "#{forecast[:temp][:max]} F",
+        min_temp: "#{forecast[:temp][:min]} F",
         conditions: forecast[:weather].first[:description],
         icon: forecast[:weather].first[:icon]
       }
@@ -70,9 +70,9 @@ class Forecast
   def hourly(forecast_params, hours)
     forecast_params[:hourly].take(hours).each do |forecast|
       hourly_hash = {
-        temperature: forecast[:temp],
+        temperature: "#{forecast[:temp]} F",
         dt: convert_date(forecast[:dt]),
-        wind_speed: forecast[:wind_speed],
+        wind_speed: "#{forecast[:wind_speed]} mph",
         wind_direction: determine_wind_direction(forecast[:wind_deg]),
         conditions: forecast[:weather].first[:description],
         icon: forecast[:weather].first[:icon]
