@@ -39,8 +39,8 @@ RSpec.describe 'forecast facade' do
           daily_forecast_keys = {dt: Date,
                                   sunrise: Date,
                                   sunset: Date,
-                                  max_temp: String,
-                                  min_temp: String,
+                                  max_temp: Float,
+                                  min_temp: Float,
                                   conditions: String,
                                   icon: String
                                 }
