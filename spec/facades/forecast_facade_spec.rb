@@ -8,29 +8,27 @@ RSpec.describe 'forecast facade' do
           params = {location: 'denver,co'}
           response_keys = {current: Hash, hourly: Array, daily: Array}
           forecast = ForecastFacade.forecast_details(params[:location])
+          numeric = [Integer, Float]
           current_forecast_keys = {
                                   dt: Date,
                                   sunrise: Date,
                                   sunset: Date,
                                   temp: String,
                                   feels_like: String,
-                                  humidity: Integer,
-                                  uvi: Float,
-                                  visibility: Integer,
+                                  humidity: [Integer, Float],
+                                  uvi: [Integer, Float],
+                                  visibility: [Integer, Float],
                                   conditions: String,
                                   icon: String
                                 }
 
-          expect(forecast.current_weather[:dt].class).to eq(current_forecast_keys[:dt])
-          expect(forecast.current_weather[:sunrise].class).to eq(current_forecast_keys[:sunrise])
-          expect(forecast.current_weather[:sunset].class).to eq(current_forecast_keys[:sunset])
-          expect(forecast.current_weather[:temp].class).to eq(current_forecast_keys[:temp])
-          expect(forecast.current_weather[:feels_like].class).to eq(current_forecast_keys[:feels_like])
-          expect(forecast.current_weather[:conditions].class).to eq(current_forecast_keys[:conditions])
-          expect(forecast.current_weather[:icon].class).to eq(current_forecast_keys[:icon])
-          expect([Integer, Float]).to include(forecast.current_weather[:humidity].class)
-          expect([Integer, Float]).to include(forecast.current_weather[:uvi].class)
-          expect([Integer, Float]).to include(forecast.current_weather[:visibility].class)
+          forecast.current_weather.each do |key, value|
+            if numeric.include?(forecast.current_weather[key].class)
+              expect(current_forecast_keys[key]).to include(forecast.current_weather[key].class)
+            else
+              expect(forecast.current_weather[key]).to be_a(current_forecast_keys[key])
+            end
+          end
         end
       end
       it 'daily_weather' do
@@ -48,13 +46,9 @@ RSpec.describe 'forecast facade' do
                                 }
 
           forecast.daily_weather.each do |day|
-            expect(day[:dt].class).to eq(daily_forecast_keys[:dt])
-            expect(day[:sunrise].class).to eq(daily_forecast_keys[:sunrise])
-            expect(day[:sunset].class).to eq(daily_forecast_keys[:sunset])
-            expect(day[:max_temp].class).to eq(daily_forecast_keys[:max_temp])
-            expect(day[:min_temp].class).to eq(daily_forecast_keys[:min_temp])
-            expect(day[:conditions].class).to eq(daily_forecast_keys[:conditions])
-            expect(day[:icon].class).to eq(daily_forecast_keys[:icon])
+            day.each do |key, value|
+              expect(day[key]).to be_a(daily_forecast_keys[key])
+            end
           end
         end
       end
@@ -67,15 +61,14 @@ RSpec.describe 'forecast facade' do
                                   wind_speed: String,
                                   wind_direction: String,
                                   conditions: String,
-                                  icon: String
+                                  icon: String,
+                                  temperature: String
                                 }
 
           forecast.hourly_weather.each do |hour|
-            expect(hour[:dt].class).to eq(hourly_forecast_keys[:dt])
-            expect(hour[:wind_speed].class).to eq(hourly_forecast_keys[:wind_speed])
-            expect(hour[:wind_direction].class).to eq(hourly_forecast_keys[:wind_direction])
-            expect(hour[:conditions].class).to eq(hourly_forecast_keys[:conditions])
-            expect(hour[:icon].class).to eq(hourly_forecast_keys[:icon])
+            hour.each do |key, value|
+              expect(hour[key]).to be_a(hourly_forecast_keys[key])
+            end
           end
         end
       end
