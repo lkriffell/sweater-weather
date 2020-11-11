@@ -3,9 +3,7 @@ class Api::V1::UsersController < ApplicationController
     user = UsersFacade.create_user(user_params)
     if user.class == User && user.save
       render json: UserSerializer.new(user)
-    elsif user.message == 'Passwords must match!'
-      render json: ErrorSerializer.new(user)
-    elsif user.message == 'That email already exists!'
+    elsif user.class == Error
       render json: ErrorSerializer.new(user)
     end
   end
