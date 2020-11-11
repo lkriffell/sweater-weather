@@ -11,7 +11,7 @@ module Structures
              conditions: String,
              icon: String}
 
-    daily = {dt: String, sunrise: String, sunset: String, max_temp: String, min_temp: String, conditions: String, icon: String}
+    daily = {dt: String, sunrise: String, sunset: String, max_temp: Float, min_temp: Float, conditions: String, icon: String}
     hourly = {temperature: String, dt: String, wind_speed: String, wind_direction: String, conditions: String, icon: String}
 
     expect(forecast[:data]).to be_a(Hash)
