@@ -58,8 +58,8 @@ class Forecast
         dt: convert_date(forecast[:dt]),
         sunrise: convert_date(forecast[:sunrise]),
         sunset: convert_date(forecast[:sunset]),
-        max_temp: "#{forecast[:temp][:max]} F",
-        min_temp: "#{forecast[:temp][:min]} F",
+        max_temp: forecast[:temp][:max],
+        min_temp: forecast[:temp][:min],
         conditions: forecast[:weather].first[:description],
         icon: forecast[:weather].first[:icon]
       }
