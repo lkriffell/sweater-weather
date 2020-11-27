@@ -10,5 +10,6 @@ jobs:
     steps:
       - checkout
       - run:
-        - ruby/gem install bundler:2.1.4
-        - ruby/bundle-install
+          name: Which bundler?
+          command: bundle -v
+      - ruby/bundle-install
