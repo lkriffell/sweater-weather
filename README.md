@@ -1,24 +1,22 @@
-# README
+## Setup
+### Prerequisites
+- Ruby 2.5.3
+- Rails 5.2.4.3
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Installation
+#### Install gems and setup your database:
+```
+bundle install
+rails db:create
+rails db:migrate
+```
 
-Things you may want to cover:
+#### Run your own development server:
+```
+rails s
+```
+- You should be able to send requests to the app via http://localhost:3000/
+- This is only an API (no frontend view)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Running the Tests
+- Run with `bundle exec rspec`. All tests should be passing.
