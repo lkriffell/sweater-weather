@@ -19,4 +19,4 @@ rails s
 - This is only an API (no frontend view)
 
 ### Running the Tests
-- Run with `bundle exec rspec`. All tests should be passing.
+- Run with `bundle exec rspec`
